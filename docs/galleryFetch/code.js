@@ -10,12 +10,12 @@ getHtml = {
 //Global Img Table of src
 const imgTable = [];
 let maxTable = 5;
-let currentImgNum;
+let currentImgNum = 0;
 
 //onload functions
 window.onload = () => {
 addImgToImgTable();
-console.log(imgTable);
+showImg();
 
 };
 
@@ -44,6 +44,26 @@ function fetchPhotosURL(n){
     }).catch(err => {console.log(`Error fetch`);});
 }
 
+function addListiners() {
+    prevBtn.addEventListener('click',function(){
+        currentImgNum--; 
+        showImg();
+    });
+    nextBtn.addEventListener('click', function(){
+        currentImgNum++;
+        shwoImg();
+    });
+}
+
+function showImg(){
+    if(currentImgNum>maxTable)
+    {
+        currentImgNum = 0;
+    } else if(currentImgNum<0){
+        currentImgNum = maxTable;
+    }
+    imgView.src = imgTable[currentImgNum];
+}
 
 
 
