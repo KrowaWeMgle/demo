@@ -3,7 +3,7 @@ getHtml = {
     imgView: document.querySelector('.gallerView > img'),
     prevBtn: document.querySelector('.gallerVIew > button[name="prevButton"]'),
     nextBtn: document.querySelector('.gallerVIew > button[name="nextButton"]'),
-    
+
 
 };
 
@@ -24,7 +24,7 @@ addImgToImgTable();
 const addImgToImgTable = () => {
     
     for(let i = 0; i<imgTable.length; i++) {
-        imgTable[i] = fetchPhotos(number);
+        imgTable[i] = fetchPhotosURL(number);
     }
     console.log(imgTable);
 };
@@ -43,4 +43,6 @@ function fetchPhotosURL(n){
         return objectURL;
     }).catch(err => {console.log(`Error fetch`);});
 }
+
+
 
