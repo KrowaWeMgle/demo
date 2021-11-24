@@ -41,7 +41,7 @@ const addImgToImgTable = () => {
     console.log(imgTable);
 };
 
-function fetchPhotos(n){
+function fetchPhotosURL(n){
     fetch(`photos/photo_${n}`)
     .then(response => {
         if(response.ok){
@@ -52,79 +52,7 @@ function fetchPhotos(n){
         }
     }).then(myBlob => {
         let objectURL = URL.createObjectURL(myBlob);
-        let imgObject = document.createElement('img');
-        imgObject.src = objectURL;
-        return imgObject;
+        return objectURL;
     }).catch(err => {console.log(`Error fetch`);});
 }
 
-
-
-    
-//End Gallery thumbnail
-
-
-
-
-
-
-//Gellery View
-//img set
-const setImg = (num=0) => {
-
-    imgArea.src = imgTable[num];
-    console.log(imgTable[num]);
-    currentImgNum = num;
-    setImgText(num);
-};
-
-
-
-//inf currentNum is largeor or smaller than Table index
-const testCurrentNumber = (curentNum) => {
-    if(curentNum >= maxTable) {
-        return false
-    }
-    else if(curentNum < 0) {
-        return false
-    }
-    else {
-        return true
-    }
-
-};
-
-const setImgText = (num) => {
-    textImgArea.innerText = `${num+1}/${maxTable}`;
-}
-
-//add Listiners to Buttons 
-const buttonListiners = () => {
-    buttonNext.addEventListener('mousedown', () => {
-
-        currentImgNum++;
-        let testNumber = testCurrentNumber(currentImgNum);
-        
-        if(testNumber === true)
-         {setImg(currentImgNum)}
-        else {setImg(0);}
-
-    });
-    buttonBack.addEventListener('mousedown',() => {
-
-        currentImgNum--;
-        let testNumber = testCurrentNumber(currentImgNum);
-        
-        if(testNumber === true)
-         {setImg(currentImgNum);}
-        else {setImg(maxTable-1);}
-
-        
-
-    });
-    buttonClose.addEventListener('click', () => {
-        galleryViewHide();
-    })
-
-};
-//end Gallery view
