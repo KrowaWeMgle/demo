@@ -9,12 +9,11 @@ getHtml = {
 
 //Global Img Table of src
 const imgTable = [];
+let maxTable = 5;
 let currentImgNum;
 
 //onload functions
 window.onload = () => {
-
-addImgToImgTable();
 
 
 };
@@ -23,14 +22,14 @@ addImgToImgTable();
 //table of img
 const addImgToImgTable = () => {
     
-    for(let i = 0; i<imgTable.length; i++) {
+    for(let i = 0; i<maxTable; i++) {
         imgTable[i] = fetchPhotosURL(number);
     }
     console.log(imgTable);
 };
 
 function fetchPhotosURL(n){
-    fetch(`photos/photo_${n}`)
+    fetch(`photos/photo_${n}.png`)
     .then(response => {
         if(response.ok){
             return response.blob();
@@ -43,6 +42,7 @@ function fetchPhotosURL(n){
         return objectURL;
     }).catch(err => {console.log(`Error fetch`);});
 }
+
 
 
 
