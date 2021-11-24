@@ -28,6 +28,7 @@ galleryViewHide();
 
 //Gallery Thumbnail
 addThumbnailHtmlElement();
+
 };
 
 //Global
@@ -35,46 +36,33 @@ addThumbnailHtmlElement();
 const addImgToImgTable = () => {
     
     for(let i = 0; i<maxTable; i++) {
-        imgTable[i] = `./photos/photo_${i}.png`;
+        imgTable[i] = fetchPhotos(number);
     }
     console.log(imgTable);
 };
 
+function fetchPhotos(n){
+    fetch(`photos/photo_${n}`)
+    .then(response => {
+        if(response.ok){
+            return response.blob();
+        }
+        else {
+            console.log('Error fetching photos');
+        }
+    }).then(myBlob => {
+        let objectURL = URL.createObjectURL(myBlob);
+        let imgObject = document.createElement('img');
+        imgObject.src = objectURL;
+        return imgObject;
+    }).catch(err => {console.log(`Error fetch`);});
+}
 
-//Gallery Thumbnail
-const addThumbnailHtmlElement = () => {
-    //get section Parent
-    
-    for(let i =0; i<maxTable;i++){
-        let htmlImgThumb = document.createElement('img');
-        htmlImgThumb.src = imgTable[i];
-        htmlImgThumb.className = 'imgThumbStyle';
-
-        htmlImgThumb.addEventListener ('click', () => {
-            galleryViewShow();
-        });
-
-        galleryThumbnail.appendChild(htmlImgThumb);
-    }
-    console.log(`galery thumbnail added to ${galleryThumbnail.id} `);
-};
 
 
     
 //End Gallery thumbnail
 
-
-
-//Gallery View Show/Hide
-
-const galleryViewShow = () => {
-    galleryView.style.display = 'grid';
-    //galleryView.style.position = 'absolute';
-};
-const galleryViewHide = () => {
-    galleryView.style.display = 'none';
-    //galleryView.style.position = 'statick';
-};
 
 
 
@@ -89,6 +77,7 @@ const setImg = (num=0) => {
     currentImgNum = num;
     setImgText(num);
 };
+
 
 
 //inf currentNum is largeor or smaller than Table index
