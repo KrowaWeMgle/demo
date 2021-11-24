@@ -14,7 +14,8 @@ let currentImgNum;
 
 //onload functions
 window.onload = () => {
-
+addImgToImgTable();
+console.log(imgTable);
 
 };
 
