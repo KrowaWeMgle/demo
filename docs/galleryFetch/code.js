@@ -24,7 +24,7 @@ showImg();
 const addImgToImgTable = () => {
     
     for(let i = 0; i<maxTable; i++) {
-        imgTable[i] = fetchPhotosURL(number);
+        imgTable[i] = fetchPhotosURL(i);
     }
     console.log(imgTable);
 };
